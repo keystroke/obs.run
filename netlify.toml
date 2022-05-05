@@ -2,3 +2,9 @@
   from = "/"
   to = "/obs.js"
   status = 200
+
+[[redirects]]
+  from = "/"
+  to = "/watch.js"
+  status = 200
+  query = {watch}
