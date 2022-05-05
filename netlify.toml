@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "/obs.js"
+  status = 200
