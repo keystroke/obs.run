@@ -1,10 +1,14 @@
 [[redirects]]
   from = "/"
-  to = "/obs.js"
+  to = "/run.js"
+  status = 200
+  
+[[redirects]]
+  from = "/run"
+  to = "/run.js"
   status = 200
 
 [[redirects]]
-  from = "/"
+  from = "/watch"
   to = "/watch.js"
   status = 200
-  query = {watch = ":any"}
