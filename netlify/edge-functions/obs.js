@@ -7,8 +7,6 @@ export default async (request, context) => {
 
   return await context.next();
 
-  // console.log("Including pricing content into the page");
-
   // // Get the page content
   // const response = await context.next();
   // const page = await response.text();
