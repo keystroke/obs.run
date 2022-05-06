@@ -3,6 +3,9 @@ export default async (request, context) => {
   const parts = url.split("/", 3);
   const flags = new Set(...url.searchParams.keys());
 
+  console.log("test!");
+  context.log("test!");
+
   context.log({ url, parts, flags, params: url.searchParams });
 
   return await context.next();
