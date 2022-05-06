@@ -1,14 +1,8 @@
 [[redirects]]
-  from = "/"
-  to = "/run.js"
-  status = 200
-  
-[[redirects]]
-  from = "/run"
-  to = "/run.js"
+  from = "/:namespace/:notebook/"
+  to = "https://api.observablehq.com/:namespace/:notebook.js?v=3"
   status = 200
 
-[[redirects]]
-  from = "/watch"
-  to = "/watch.js"
-  status = 200
+[[edge_functions]]
+  path = "/:namespace/:notebook/"
+  function = "obs"
