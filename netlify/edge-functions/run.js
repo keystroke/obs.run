@@ -15,10 +15,9 @@ export default async (request, context) => {
 };
 
 function getScript(url) {
-  return `// https://observablehq.com/@keystroke/obs-run
-import "https://obs.run/setImmediate.js";
+  return `import "https://obs.run/setImmediate.js";
 import { Runtime } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
 import define from "${url}";
 const handler = await new Runtime().module(define).value("Deno");
-if (handler instanceof Function) handler(Deno);`;
+handler(Deno);`;
 }

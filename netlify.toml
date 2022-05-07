@@ -1,5 +1,5 @@
 [[edge_functions]]
-  function = "obs"
+  function = "run"
   path = "/*"
 
 [[redirects]]
