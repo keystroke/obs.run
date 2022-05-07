@@ -1,0 +1,13 @@
+[[edge_functions]]
+  function = "obs"
+  path = "/*"
+
+[[redirects]]
+  from = "/"
+  to = "/watch.js"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
