@@ -19,5 +19,5 @@ function getScript(url) {
 import { Runtime } from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
 import define from "${url}";
 const handler = await new Runtime().module(define).value("Deno");
-await handler(Deno);`;
+export default await handler(Deno);`;
 }
