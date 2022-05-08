@@ -8,6 +8,7 @@ export default async (request, context) => {
     context.log(notebookUrl);
     const response = new Response(getScript(notebookUrl));
     response.headers.set("Access-Control-Allow-Origin", "*");
+    response.headers.set("Content-Type", "application/javascript");
     return response;
   } catch (error) {
     context.log("error", request.url, error);
