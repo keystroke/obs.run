@@ -1,17 +1,18 @@
 export default async (request, context) => {
   try {
     const url = new URL(request.url);
-    if (url.pathname === "/") return;
-    if (url.pathname.indexOf(".") !== -1) return;
-    url.searchParams.set("v", "3");
+    context.log({ date: new Date(), url });
+    if (url.pathname === '/') return;
+    if (url.pathname.indexOf('.') !== -1) return;
+    url.searchParams.set('v', '3');
     const notebookUrl = `https://api.observablehq.com${url.pathname}.js?${url.searchParams}`;
-    context.log(notebookUrl);
+    context.log({ date: new Date(), url, notebookUrl });
     const response = new Response(getScript(notebookUrl));
-    response.headers.set("Access-Control-Allow-Origin", "*");
-    response.headers.set("Content-Type", "application/javascript");
+    response.headers.set('Access-Control-Allow-Origin', '*');
+    response.headers.set('Content-Type', 'application/javascript');
     return response;
   } catch (error) {
-    context.log("error", request.url, error);
+    context.log('error', request.url, error);
   }
 };
 
