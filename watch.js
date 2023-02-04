@@ -26,12 +26,12 @@ function getArgs() {
     || [Deno.env.get("RELOAD")].filter(i => i).map(i => `--reload=${i}`)[0]
     || "--reload=https://api.observablehq.com";
   let permissions = Deno.args
-    .filter(a => a.startsWith("--"))
+    .filter(a => a === "-A" || a.startsWith("--"))
     .filter(a => a !== watch && a !== reload)
     .join(" ")
       || Deno.env.get("PERMISSIONS")
       || "";
-  const notebook = Deno.args.filter(a => !a.startsWith("--"))[0]
+  const notebook = Deno.args.filter(a => !a.startsWith("-"))[0]
     || Deno.env.get("NOTEBOOK");
   if (watch)
     watch = Number(watch.split("=", 2)[1]) || 31000;
