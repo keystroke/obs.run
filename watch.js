@@ -23,7 +23,7 @@ function getArgs() {
   let watch = Deno.args.filter(a => a.startsWith("--watch"))[0]
     || Deno.env.get("WATCH").filter(i => i).map(i => `--watch=${i}`)[0];
   let reload = Deno.args.filter(a => a.startsWith("--reload"))[0]
-    || [Deno.env.get("RELOAD")].filter(i => i).map(i => `--reload=${i}`)[0]
+    || [Deno.env.get("RELOAD")].filter(i => i).map(i => i === "*" ? "--reload" : `--reload=${i}`)[0]
     || "--reload=https://api.observablehq.com";
   let permissions = Deno.args
     .filter(a => a === "-A" || a.startsWith("--"))
@@ -37,6 +37,8 @@ function getArgs() {
     watch = Number(watch.split("=", 2)[1]) || 31000;
   if (reload != "--reload" && !reload.includes("https://api.observablehq.com"))
     reload += ",https://api.observablehq.com";
+  if (reload != "--reload" && !reload.includes("https://obs.run"))
+    reload += ",https://obs.run";
   if (permissions)
     permissions = permissions.split(" ");
   return { watch, reload, permissions, notebook };
