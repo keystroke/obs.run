@@ -36,7 +36,7 @@ function getArgs() {
   const notebook = Deno.args.filter(a => !a.startsWith("-"))[0]
     || Deno.env.get("NOTEBOOK");
   if (watch) {
-    let parts = watch.split("=", 2)[1]?.split(';', 3);
+    let parts = watch.split("=", 2)[1]?.split(';', 3) || [];
     watch = {
       slow: Number(parts[0]) || 31000,
       fast: Number(parts[1]) || 3000,
