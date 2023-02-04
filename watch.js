@@ -4,8 +4,9 @@ const { watch, ...args } = getArgs();
 if (watch) {
   let etag = await getEtag(args);
   let worker = startWorker(args);
+  let updated = new Date();
   while (true) {
-    await delay(watch);
+    await delay(new Date() - updated > watch.recent ? watch.slow : watch.fast);
     const latest = await getEtag(args);
     if (latest && etag !== latest) {
       console.log(`$ SIGTERM -> p:${worker.pid}`);
@@ -13,6 +14,7 @@ if (watch) {
       worker.close();
       worker = startWorker(args);
       etag = latest;
+      updated = new Date();
     }
   }
 }
@@ -33,8 +35,14 @@ function getArgs() {
       || "";
   const notebook = Deno.args.filter(a => !a.startsWith("-"))[0]
     || Deno.env.get("NOTEBOOK");
-  if (watch)
-    watch = Number(watch.split("=", 2)[1]) || 31000;
+  if (watch) {
+    let parts = watch.split("=", 2)[1]?.split(';', 3);
+    watch = {
+      slow: Number(parts[0]) || 31000,
+      fast: Number(parts[1]) || 3000,
+      recent: Number(parts[2]) || 5 * 60,
+    };
+  }
   if (reload != "--reload" && !reload.includes("https://api.observablehq.com"))
     reload += ",https://api.observablehq.com";
   if (reload != "--reload" && !reload.includes("https://obs.run"))
