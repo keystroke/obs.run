@@ -37,6 +37,8 @@ function getArgs() {
     watch = Number(watch.split("=", 2)[1]) || 31000;
   if (reload != "--reload" && !reload.includes("https://api.observablehq.com"))
     reload += ",https://api.observablehq.com";
+  if (permissions)
+    permissions = permissions.split(" ");
   return { watch, reload, permissions, notebook };
 }
 
@@ -57,7 +59,7 @@ function startWorker({ reload, permissions, notebook }) {
     "deno",
     "run",
     reload,
-    permissions,
+    ...permissions,
     `https://obs.run/${notebook}`,
   ];
   console.log(`$ ${cmd.join(" ")}`);
