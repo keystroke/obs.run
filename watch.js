@@ -40,7 +40,7 @@ function getArgs() {
     watch = {
       slow: Number(parts[0]) || 31000,
       fast: Number(parts[1]) || 3000,
-      recent: Number(parts[2]) || 5 * 60,
+      recent: Number(parts[2]) || 1000 * 60 * 5,
     };
   }
   if (reload != "--reload" && !reload.includes("https://api.observablehq.com"))
